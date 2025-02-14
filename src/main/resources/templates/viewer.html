@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--    <title th:text="'CV Craft | ' + ${userProfile.getUsername()} + '\'s Resume' + ${(userProfile.getTheme() > 3) ? ' Website' : ''}"></title>-->
+    <title>CV Craft | Resume Viewer</title>
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Elsie:wght@400;900&family=Playball&family=Stardos+Stencil:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-light.css">
+    <link type="text/css" rel="stylesheet" href="../css/viewer.css" />
+    <link type="text/css" rel="stylesheet" href="../css/navbar.css" />
+</head>
+<body>
+    <header class="viewer-nav">
+        <div class="viewer-nav-container">
+            <div class="logo-container">
+                <a class="logo-link" href="/">
+                    <img class="logo-image" src="../img/logo-color.png" alt="cv-craft-logo">
+                    <div class="logo-text">
+                        <span class="logo-text-first-part">CV</span><span class="logo-text-second-part">Craft</span>
+                    </div>
+                </a>
+            </div>
+            <div class="menu-container">
+                <a class="menu-option" href="/"><i class="fa-sharp fa-light fa-house"></i></a>
+                <div class="menu-option-separator"></div>
+                <a class="menu-option" href="/edit"><i class="fa-light fa-pen-to-square"></i></a>
+                <div class="menu-option-separator"></div>
+                <a class="menu-option" th:href="@{|~/view/${#authentication.name}|}"><i class="fa-light fa-download"></i></a>
+                <div class="menu-option-separator"></div>
+                <a class="menu-option" href="/logout"><i class="fa-light fa-right-from-bracket"></i></a>
+            </div>
+            <div class="user-container">
+                <div class="user-wrapper">
+                    <div class="user-wrapper-ext"></div>
+                    <div class="user-text-wrapper" sec:authorize="isAuthenticated()">
+                        <div class="user-text" sec:authentication="name"></div>
+                    </div>
+                    <img class="user-image" src="../resumes/profile-pic.png">
+                </div>
+            </div>
+        </div>
+    </header>
+    <iframe class="viewerIframe" id="resumeContent" th:src="'/view/'+${userProfile.getUserName()}" sandbox="allow-forms allow-same-origin allow-scripts allow-top-navigation allow-popups">
+    </iframe>
+</body>
+</html>

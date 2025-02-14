@@ -1,0 +1,425 @@
+html {
+  align-items: center;
+}
+body {
+  /* width: 30%; */
+  margin: 0;
+  background-color: #005C78;
+}
+
+body,
+div,
+form,
+input,
+select,
+textarea,
+label {
+  padding: 0;
+  margin: 0;
+  outline: none;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 16px;
+  color: #000;
+  line-height: 22px;
+}
+
+label {
+  display: block;
+  color: #005C78;
+  width: calc(100% - 12px);
+  text-align: left;
+}
+
+h1 {
+  position: absolute;
+  margin: 0;
+  font-size: 48px;
+  color: #fff;
+  z-index: 2;
+  line-height: 83px;
+}
+
+legend {
+  padding: 7px 35px;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 18px;
+  color: #fff;
+  background-color: #006989;
+  border-radius: 16px;
+}
+
+textarea {
+  width: calc(100% - 12px);
+  padding: 5px;
+}
+
+.testbox {
+  margin: auto;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: inherit;
+  padding: 20px;
+}
+
+form {
+  width: 100%;
+  padding: 20px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 0 8px #006989;
+}
+
+.banner {
+  height: 150px;
+  background-color: #E88D67;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+input,
+select,
+textarea {
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  color: #000;
+}
+
+select {
+  font-family: sans-serif;
+  font-size: 16px;
+  color: #fff;
+  background-color: #006989;
+  padding: 3px 5px;
+}
+
+#themeSelect {
+  color: #fff;
+  background-color: #E88D67;
+  padding: 5px 7px;
+}
+
+input {
+  width: calc(100% - 10px);
+  padding: 5px;
+}
+
+input[type="date"] {
+  padding: 4px 5px;
+}
+
+textarea {
+  width: calc(100% - 12px);
+  padding: 5px;
+}
+
+/* .item:hover p,
+.item:hover i,
+.question:hover p,
+.question label:hover,
+input:hover::placeholder {
+  color: #000;
+}
+.item input:hover,
+.item select:hover,
+.item textarea:hover {
+  border: 1px solid transparent;
+  box-shadow: 0 0 3px 0 #006622;
+  color: #fff;
+} */
+
+.item:hover p,
+.item:hover i,
+.question:hover p,
+.question label:hover,
+input:hover::placeholder {
+  color: #000;
+}
+
+.item input:hover,
+.item textarea:hover {
+  border: 1px solid transparent;
+  box-shadow: 0 0 3px 0 #888;
+  color: #000;
+}
+
+.item select:hover {
+  border: 1px solid transparent;
+  box-shadow: 0 0 3px 0 #888;
+  color: #fff;
+}
+.item {
+  position: relative;
+  margin: 10px 0;
+}
+
+.item span {
+  color: red;
+}
+
+.week {
+  display: flex;
+  justify-content: space-between;
+}
+
+.columns {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+fieldset{
+  border-width: 2px;
+  border-color: #006989;
+  padding-bottom: 20px;
+}
+
+.columns div  {
+  width: 48%;
+}
+
+.columns select, p{
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+.item p {
+  margin-bottom: 5px;
+}
+
+.delete  {
+  width: 100%;
+  margin-left: 25%;
+  margin-right: 25%;
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #006989;
+}
+
+.delete a.commonAnchor,
+a.commonAnchor.del-skill{
+  background-color: #dc3545;
+}
+
+.delete a.commonAnchor:hover,
+a.commonAnchor.del-skill:hover{
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+[type="date"]::-webkit-calendar-picker-indicator {
+  right: 1%;
+  z-index: 2;
+  opacity: 0;
+  cursor: pointer;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  display: none;
+}
+
+label.radio {
+  position: relative;
+  display: inline-block;
+  margin: 5px 20px 15px 0;
+  cursor: pointer;
+}
+
+.question span {
+  margin-left: 30px;
+}
+
+.question-answer label {
+  display: block;
+}
+
+label.radio:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  border: 2px solid #15b98d;
+  /* #CCC */
+}
+
+input[type="radio"]:checked + label:before,
+label.radio:hover:before {
+  /* border: 2px solid #fff; */
+}
+
+label.radio:after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 5px;
+  width: 8px;
+  height: 4px;
+  border: 3px solid #15b98d;
+  border-top: none;
+  border-right: none;
+  transform: rotate(-45deg);
+  opacity: 0;
+}
+
+input[type="radio"]:checked + label:after {
+  opacity: 1;
+}
+
+.flax {
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn-block {
+  margin-top: 10px;
+  text-align: center;
+}
+
+a.commonAnchor {
+  display: inline-block;
+}
+
+button, a.commonAnchor {
+  text-decoration:none;
+  width: 150px;
+  padding: 7px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background: #006989;
+  font-size: 18px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover, a.commonAnchor:hover {
+  background: #fff;
+  color: #006989;
+  border: 1px solid #006989;
+  border-radius: 5px;
+}
+
+.fas {
+  color: #006989;
+}
+
+input[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+
+.item i,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  font-size: 18px;
+  color: #006989;
+}
+
+.item i {
+  right: 12px;
+  bottom: 18px;
+  z-index: 1;
+}
+
+.head{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.head h1{
+  color: #15b98d;
+}
+
+.headborder{
+  border: 2px solid #006989;
+  /*border-top: 0px;*/
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+}
+
+table {
+  margin-left: 8%;
+  margin-right: 8%;
+  display: block;
+}
+tr {
+   display: inline-block;
+   padding: 10px;
+   border: solid 1px #006989;
+   margin: 5px;
+}
+td {
+   display: inline;
+}
+
+.del-skill {
+  width: 120px;
+  padding: 5px;
+  margin-top: 25px;
+  text-align: center;
+}
+
+a.commonAnchor.addAnchor {
+  background-color: #3C5B6F;
+}
+
+a.commonAnchor.addAnchor:hover {
+  color: #3C5B6F;
+  background-color: #fff;
+  border-color: #3C5B6F;
+}
+
+button.updateButton {
+  background-color: #15b98d;
+}
+
+button.updateButton:hover {
+  color: #15b98d;
+  background-color: #fff;
+  border-color: #15b98d;
+}
+
+/*a#generateAnchor {*/
+/*  background-color: #E88D67;*/
+/*}*/
+
+/*a#generateAnchor:hover {*/
+/*  color: #E88D67;*/
+/*  background-color: #fff;*/
+/*  border-color: #E88D67;*/
+/*}*/
+
+/* tr:nth-child(3n+1) {
+   clear: left;
+} */
+
+@media (min-width: 568px) {
+  .name-item,
+  .city-item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .name-item input,
+  .name-item div {
+    width: calc(50% - 20px);
+  }
+
+  .name-item div input {
+    width: 97%;
+  }
+
+  .name-item div label {
+    display: block;
+    padding-bottom: 5px;
+  }
+}

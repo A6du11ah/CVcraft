@@ -1,0 +1,19 @@
+# This script assumes Docker and Docker Compose are already installed on your system.
+
+# Step 1: Stop and remove all containers, networks, and volumes created by Docker Compose
+docker-compose down -v
+
+# Step 2: Pull the latest versions of the images defined in the docker-compose.yml file
+docker-compose pull
+
+# Step 3: Start all services defined in the docker-compose.yml file in detached mode
+docker-compose up -d
+
+# Step 4: Display the logs of the 'db' and 'pagadmin' service to check for any issues during startup
+docker-compose logs db
+docker-compose logs pgadmin
+
+# Note:
+# - Ensure you have a valid docker-compose.yml file in the current directory.
+# - Run this script in the directory where your docker-compose.yml file is located.
+# - Make sure Docker and Docker Compose are installed and running.

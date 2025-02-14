@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <title>CV Craft | Build Resume</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="../css/common.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Elsie:wght@400;900&family=Playball&family=Stardos+Stencil:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-light.css">
+    <link type="text/css" rel="stylesheet" href="../css/navbar.css" />
+</head>
+
+<body>
+    <header class="viewer-nav">
+        <div class="viewer-nav-container">
+            <div class="logo-container">
+                <a class="logo-link" href="/">
+                    <img class="logo-image" src="../img/logo-color.png" alt="cv-craft-logo">
+                    <div class="logo-text">
+                        <span class="logo-text-first-part">CV</span><span class="logo-text-second-part">Craft</span>
+                    </div>
+                </a>
+            </div>
+            <div class="menu-container">
+                <a class="menu-option" href="/"><i class="fa-sharp fa-light fa-house"></i></a>
+                <div class="menu-option-separator"></div>
+                <a class="menu-option" href="/logout"><i class="fa-light fa-right-from-bracket"></i></a>
+            </div>
+            <div class="user-container">
+                <div class="user-wrapper">
+                    <div class="user-wrapper-ext"></div>
+                    <div class="user-text-wrapper" sec:authorize="isAuthenticated()">
+                        <div class="user-text" sec:authentication="name"></div>
+                    </div>
+                    <img class="user-image" src="../resumes/profile-pic.png">
+                </div>
+            </div>
+        </div>
+    </header>
+    <center class="testbox">
+        <form id="userResumeForm" action="#" th:action="@{/update}" th:object="${userProfile}" method="post">
+
+            <div class="banner">
+                <h1>Build Your Resume</h1>
+            </div>
+            <br>
+            <br>
+            <div class="headborder">
+<!--                <div class="head">-->
+<!--                    <h1 th:text="*{userName}">[UserName]</h1>-->
+<!--                </div>-->
+<!--                <br>-->
+                <center>
+                    <div class="item 1">
+                        <p>Select your resume theme</p>
+                        <select id="themeSelect" th:field="*{theme}">
+                            <option th:each="i : ${#numbers.sequence(1, 3)}" th:value="${i}" th:text="${'Document - Template ' + i}">
+                            </option>
+                            <option th:each="i : ${#numbers.sequence(4, 6)}" th:value="${i}" th:text="${'Website - Template ' + (i - 3)}">
+                            </option>
+                        </select>
+                    </div>
+                    <center>
+                        <div class="btn-block">
+                            <button class="updateButton" type="submit" href="/">Update</button>
+                        </div>
+                    </center>
+                </center>
+            </div>
+
+            <fieldset id="userBasicInfoField">
+                <legend>About You</legend>
+                <div class="columns">
+                    <div class="item">
+                        <label>First Name<span>*</span></label>
+                        <input required type="text" th:field="*{firstName}" />
+                    </div>
+                    <div class="item">
+                        <label>Last Name<span>*</span></label>
+                        <input required type="text" th:field="*{lastName}" />
+                    </div>
+                    <div class="item">
+                        <label>Email Address<span>*</span></label>
+                        <input required type="email" th:field="*{email}" />
+                    </div>
+                    <div class="item">
+                        <label>Phone Number<span>*</span></label>
+                        <input required type="tel" th:field="*{phoneNum}" />
+                    </div>
+                    <div class="item">
+                        <label>Designation<span>*</span></label>
+                        <input required type="text" th:field="*{jobTitle}" />
+                    </div>
+                    <div class="item">
+                        <label>Website</label>
+                        <input type="url" th:field="*{website}" />
+                    </div>
+                    <div class="item">
+                        <label>Summary<span>*</span></label>
+                        <textarea required type="text" rows="3" th:field="*{summary}"></textarea>
+                    </div>
+                    <div class="item">
+                        <label>Profile Pic (URL)</label>
+                        <input type="url" th:field="*{profilePic}" />
+                    </div>
+                </div>
+                <center>
+                    <div class="btn-block">
+                        <button class="updateButton" type="submit" href="/">Update</button>
+                    </div>
+                </center>
+            </fieldset>
+
+            <br />
+            <fieldset id="userExperienceField">
+                <legend>Experience</legend>
+                <div class="columns" th:each="Experience, stat: *{userExperiences}">
+                    <div class="item">
+                        <label>Company<span>*</span></label>
+                        <input required type="text" th:field="*{userExperiences[__${stat.index}__].company}" />
+                    </div>
+                    <div class="item">
+                        <label>Designation<span>*</span></label>
+                        <input required type="text" th:field="*{userExperiences[__${stat.index}__].position}" />
+                    </div>
+                    <div class="item">
+                        <label>Start Date<span>*</span></label>
+                        <input required type="date" th:field="*{userExperiences[__${stat.index}__].startDate}" />
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="item">
+                        <label>End Date<span>*</span></label>
+                        <input required type="date" th:field="*{userExperiences[__${stat.index}__].endDate}" />
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="item">
+                        <label>Description<span>*</span></label>
+                        <textarea required type="text" rows="3"
+                            th:field="*{userExperiences[__${stat.index}__].description}"></textarea>
+                    </div>
+                    <div class="item">
+                        <p>Current Job?</p>
+                        <select th:field="*{userExperiences[__${stat.index}__].currentJob}">
+                            <option th:value="1">true</option>
+                            <option th:value="0">false</option>
+                        </select>
+                    </div>
+                    <span class="delete btn-block">
+                        <a class="commonAnchor" th:href="@{'./delete?type=experience&index=' + ${stat.index}}">Delete</a>
+                    </span>
+                </div>
+                <center>
+                    <div class="btn-block">
+                        <a class="commonAnchor addAnchor" href="./edit?add=experience">Add</a>
+                        <button class="updateButton" type="submit" href="/">Update</button>
+                    </div>
+                </center>
+            </fieldset>
+
+            <br />
+            <fieldset id="userEducationField">
+                <legend>Education</legend>
+                <div class="columns" th:each="education, stat: *{userEducations}">
+                    <div class="item">
+                        <label>College<span>*</span></label>
+                        <input required type="text" th:field="*{userEducations[__${stat.index}__].college}" />
+                    </div>
+                    <div class="item">
+                        <label>Degree<span>*</span></label>
+                        <input required type="text" th:field="*{userEducations[__${stat.index}__].degree}" />
+                    </div>
+
+                    <div class="item">
+                        <label>Grade<span>*</span></label>
+                        <input required type="text" th:field="*{userEducations[__${stat.index}__].grade}" />
+                    </div>
+
+                    <div class="item">
+                        <label>Start Date<span>*</span></label>
+                        <input required type="date" th:field="*{userEducations[__${stat.index}__].startDate}" />
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+
+                    <div class="item">
+                        <label>End Date<span>*</span></label>
+                        <input required type="date" th:field="*{userEducations[__${stat.index}__].endDate}" />
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="item">
+                        <p>Current Education?</p>
+                        <select th:field="*{userEducations[__${stat.index}__].currentEducation}">
+                            <option th:value="1">true</option>
+                            <option th:value="0">false</option>
+                        </select>
+                    </div>
+                    <span class="delete btn-block">
+                        <a class="commonAnchor" th:href="@{'./delete?type=education&index=' + ${stat.index}}">Delete</a>
+                    </span>
+                </div>
+                <center>
+                    <div class="btn-block">
+                        <a class="commonAnchor addAnchor" href="./edit?add=education">Add</a>
+                        <button class="updateButton" type="submit" href="/">Update</button>
+                    </div>
+                </center>
+            </fieldset>
+
+            <br />
+            <fieldset id="userProjectField">
+                <legend>Projects</legend>
+                <div class="columns" th:each="project, stat: *{userProjects}">
+                    <div class="item">
+                        <label>Project Name<span>*</span></label>
+                        <input required type="text" th:field="*{userProjects[__${stat.index}__].projectName}" />
+                    </div>
+
+                    <div class="item">
+                        <label>Tools used<span>*</span></label>
+                        <input required type="text" th:field="*{userProjects[__${stat.index}__].tools}" />
+                    </div>
+
+                    <div class="item">
+                        <label>Start Date<span>*</span></label>
+                        <input required type="date" th:field="*{userProjects[__${stat.index}__].startDate}" />
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+
+                    <div class="item">
+                        <label>End Date<span>*</span></label>
+                        <input required type="date" th:field="*{userProjects[__${stat.index}__].endDate}" />
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+
+                    <div class="item">
+                        <label>Description<span>*</span></label>
+                        <textarea required type="text" rows="3"
+                            th:field="*{userProjects[__${stat.index}__].description}"></textarea>
+                    </div>
+                    <span class="delete btn-block">
+                        <a class="commonAnchor" th:href="@{'./delete?type=project&index=' + ${stat.index}}">Delete</a>
+                    </span>
+                </div>
+                <center>
+                    <div class="btn-block">
+                        <a class="commonAnchor addAnchor" href="./edit?add=project">Add</a>
+                        <button class="updateButton" type="submit" href="/">Update</button>
+                    </div>
+                </center>
+            </fieldset>
+
+            <br>
+            <fieldset id="userSkillField">
+                <legend>Skills</legend>
+                <table>
+                    <tr th:each="skill, stat: *{userSkills}">
+                        <td>
+                            <input required class="form-control" th:field="*{userSkills[__${stat.index}__].skillName}">
+                            <br>
+                            <center>
+                                <a class="commonAnchor del-skill"
+                                    th:href="@{'./delete?type=skill&index=' + ${stat.index}}">Delete</a>
+                            </center>
+                        </td>
+                    </tr>
+                </table>
+                <center>
+                    <div class="btn-block">
+                        <a class="commonAnchor addAnchor" href="./edit?add=skill">Add</a>
+                        <button class="updateButton" type="submit" href="/">Update</button>
+                    </div>
+                </center>
+            </fieldset>
+
+            <br>
+            <center>
+                <p><a class="commonAnchor generateAnchor" href="./generate">Generate</a></p>
+            </center>
+        </form>
+    </center>
+</body>
+
+</html>

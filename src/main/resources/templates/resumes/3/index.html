@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+	<title
+		th:text="${userProfile.getFirstName()}+' '+${userProfile.getLastName()} +' - '+ ${userProfile.getJobTitle()}">
+		[Title]</title>
+
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="" />
+	<meta name="description" content="Resume Template 3" />
+
+	<link rel="stylesheet" type="text/css"
+		href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="../resumes/3/style.css" media="all" />
+</head>
+
+<body>
+
+	<div id="doc2" class="yui-t7">
+		<div id="inner">
+
+			<div id="hd">
+				<div class="yui-gc">
+					<div id="one">
+						<img id="pic"
+							th:src="${userProfile.getProfilePic() == null || userProfile.getProfilePic().trim() == ''}? '../resumes/no-profile-pic.png' : ${userProfile.getProfilePic()}"
+							alt="profile pic" />
+					</div>
+					<div id="two" class="yui-u first">
+						<h1>
+							<span th:text="${userProfile.getFirstName()}+' '+${userProfile.getLastName()}">[First Name +Last Name]</span>
+							<a th:if="${originalUser}" href="/edit">Edit</a>
+						</h1>
+						
+						<h2 th:text="${userProfile.getJobTitle()}">[Job Title]</h2>
+					</div>
+
+					<div id="three" class="yui-u">
+						<div class="contact-info">
+							<!-- TODO : href="mailto:${}" -->
+							<h3 th:text="${userProfile.getPhoneNum()}">[Phone Number]</h3>
+							<h3><a th:text="${userProfile.getEmail()}" href="#">[email]</a></h3>
+							<h3><a th:text="${userProfile.getWebsite()}" href="#">[Website]</a></h3>
+							<!-- <h3><a id="pdf" >Download PDF</a></h3> -->
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="bd">
+				<div id="yui-main">
+					<div class="yui-b">
+						<div class="yui-gf">
+							<div class="yui-u first">
+								<h2>Profile</h2>
+							</div>
+							<div class="yui-u">
+								<p class="enlarge" th:text="${userProfile.getSummary()}">[Default Summary] Progressively
+									evolve cross-platform ideas before impactful infomediaries. Energistically visualize
+									tactical initiatives before cross-media catalysts for change.
+								</p>
+							</div>
+						</div>
+
+						<div class="yui-gf">
+							<div class="yui-u first">
+								<h2>Experience</h2>
+							</div>
+							<div class="yui-u" th:each="experience : ${userProfile.getUserExperiences()}">
+								<div class="job last">
+									<h2 th:text="${experience.getCompany()}">[company]</h2>
+									<h3 th:text="${experience.getPosition()}">[Position]</h3>
+									<h4>
+										<span th:text="${experience.formattedStartDate()}">[Start Date]</span>
+										-
+										<span
+											th:text="${experience.isCurrentJob()}? 'Present' : ${experience.formattedEndDate()}">[End
+											Date]
+										</span>
+									</h4>
+									<p th:text="${experience.getDescription()}">
+										[Work Description] Intrinsicly enable optimal core competencies through
+										corporate relationships.Phosfluorescently implement worldwide vortals and
+										client-focused imperatives.
+										Conveniently initiate virtual paradigms and top-line convergence. </p>
+								</div>
+							</div>
+						</div>
+
+
+
+
+						<div class="yui-gf">
+							<div class="yui-u first">
+								<h2>Technical Skills</h2>
+							</div>
+
+
+
+							<div class="yui-u">
+
+								<span th:each="i : ${#numbers.sequence(0, 2)}">
+									<ul class="skills">
+										<div th:each="skill, index : ${userProfile.getUserSkills()}"
+											th:unless="${(index.index-i) % 3}">
+											<li th:text="${skill.getSkillName()}">[Skill Name]</li>
+										</div>
+									</ul>
+								</span>
+							</div>
+						</div>
+
+						<div class="yui-gf">
+							<div class="yui-u first">
+								<h2>Projects</h2>
+							</div>
+							<div class="yui-u" th:each="project: ${userProfile.getUserProjects()}">
+								<div class="job last">
+									<h2 th:text="${project.getProjectName()}">[Project Name]</h2>
+									<h3 th:text="${project.getTools()}">
+										[Tools used]</h3>
+									<h4>
+										<span th:text="${project.formattedStartDate()}">[Start Date]</span>
+										-
+										<span th:text="${project.formattedEndDate()}">[End Date]</span>
+									</h4>
+									<p th:text="${project.getDescription()}">[Project Description] Intrinsicly enable
+										optimal core competencies through corporate relationships.Phosfluorescently
+										implement worldwide vortals and client-focused imperatives. Conveniently
+										initiate virtual paradigms and top-line convergence. </p>
+								</div>
+							</div>
+						</div>
+
+						<div class="yui-gf last">
+							<div class="yui-u first">
+								<h2>Education</h2>
+							</div>
+							<div class="yui-u" th:each="education : ${userProfile.getUserEducations()}">
+								<h2 th:text="${education.getCollege()}">[college]</h2>
+
+								<div class="job last">
+									<h3>
+										<span th:text="${education.getDegree()}">[Degree]</span>
+										-
+										<span th:text="${education.getGrade()}">[Grades]</span>
+									</h3>
+									<h4 class="subDetails">
+										<span th:text="${education.formattedStartDate()}">[Start Date]</span>
+										-
+										<span
+											th:text="${education.isCurrentEducation()}? 'Present' : ${education.formattedEndDate()}">
+											[End Date] </span>
+									</h4>
+								</div>
+								<br>
+							</div>
+						</div>
+
+						<!-- <div class="yui-gf last">
+							<div class="yui-u first">
+								<h2>Skills</h2>
+							</div>
+							<div class="yui-u">
+								<div class="talent">
+									<h2>Web Design</h2>
+									<p>Assertively exploit wireless initiatives rather than synergistic core
+										competencies. </p>
+								</div>
+								<div class="talent">
+									<h2>Interface Design</h2>
+									<p>Credibly streamline mission-critical value with multifunctional functionalities.
+									</p>
+								</div>
+								<div class="talent">
+									<h2>Project Direction</h2>
+									<p>Proven ability to lead and manage a wide variety of design and development
+										projects in team and independent situations.</p>
+								</div>
+							</div>
+						</div> -->
+
+					</div>
+				</div>
+			</div>
+			<div id="ft">
+				<p><span th:text="${userProfile.getFirstName()}+' '+${userProfile.getLastName()}">[First Name + Last
+						Name]</span> &mdash; <a th:text="${userProfile.getEmail()}">[email]</a> &mdash; <span
+						th:text="${userProfile.getPhoneNum()}">[Phone Number]</span></p>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+.viewer-nav {
+    height: 60px;
+    width: 100%;
+    background-color: black;
+    position: sticky;
+}
+
+.viewer-nav-container {
+    height: 100%;
+    width: 100%;
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-container {
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+
+    left: 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+a.logo-link, a.logo-link:visited, a.logo-link:active, a.logo-link:hover {
+    color: inherit;
+    text-decoration: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img.logo-image {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+}
+
+.logo-text span.logo-text-first-part {
+    font-family: Stardos Stencil;
+    font-size: 25px;
+    font-weight: 600;
+    color: #E88D67;
+}
+
+.logo-text span.logo-text-second-part {
+    font-family: Playball;
+    font-size: 23px;
+    color: #fff;
+}
+
+.menu-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-anon-options, .menu-auth-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-option-separator {
+    height: 40px;
+    width: 1px;
+    background-color: #388cb2;
+    margin: 0 5px;
+}
+
+a.menu-option {
+    height: 40px;
+    width: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+a.menu-option:hover i {
+    color: #E88D67;
+}
+
+a.menu-option i{
+    font-size: 18px;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.user-container {
+    height: 100%;
+    background-color: #E88D67;
+
+    position: absolute;
+    z-index: 1;
+    right: 0;
+}
+
+.user-wrapper {
+    height: 100%;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-wrapper-ext {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 60px 30px 0 0;
+    border-color: black transparent transparent transparent;
+}
+
+.user-text {
+    height: 100%;
+    width: 120px;
+    color: black;
+
+    font-size: 16px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img.user-image {
+    height: 40px;
+    width: 40px;
+    margin-left: 5px;
+    margin-right: 15px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+}

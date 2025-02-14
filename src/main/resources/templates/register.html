@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <title>CV Craft | Create Profile</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="../css/common.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Elsie:wght@400;900&family=Playball&family=Stardos+Stencil:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-light.css">
+    <link type="text/css" rel="stylesheet" href="../css/navbar.css" />
+</head>
+
+<body>
+    <header class="viewer-nav">
+        <div class="viewer-nav-container">
+            <div class="logo-container">
+                <a class="logo-link" href="/">
+                    <img class="logo-image" src="../img/logo-color.png" alt="cv-craft-logo">
+                    <div class="logo-text">
+                        <span class="logo-text-first-part">CV</span><span class="logo-text-second-part">Craft</span>
+                    </div>
+                </a>
+            </div>
+            <div class="menu-container">
+                <a class="menu-option" href="/"><i class="fa-sharp fa-light fa-house"></i></a>
+                <div class="menu-option-separator"></div>
+                <a class="menu-option" href="/login"><i class="fa-light fa-right-to-bracket"></i></a>
+            </div>
+            <div class="user-container">
+                <div class="user-wrapper">
+                    <div class="user-wrapper-ext"></div>
+                    <img class="user-image" src="../resumes/profile-pic.png">
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="testbox">
+        <form action="#" th:action="@{/create}" th:object="${userProfile}" method="post">
+
+            <div class="banner">
+                <h1>Create Your Profile</h1>
+            </div>
+            <br>
+            <br>
+            
+            <fieldset th:object="${user}">
+                <legend>User Details</legend>
+                
+                <div class="columns">
+                    
+                    <div class="item">
+                        <label>Username
+                            <span>*</span>
+                            <span th:if="${notAvailable} == true">Already Taken</span>
+                        </label>
+                        <input required type="text" th:field="*{username}" />
+                    </div>
+                    <div class="item">
+                        <label>Password<span>*</span></label>
+                        <input required type="password" th:field="*{password}" />
+                    </div>
+                </div>
+            </fieldset>
+            <br>
+
+            <fieldset>
+                <legend>About You</legend>
+                <div class="columns">
+                    <div class="item">
+                        <label>First Name<span>*</span></label>
+                        <input required type="text" th:field="*{firstName}" />
+                    </div>
+                    <div class="item">
+                        <label>Last Name<span>*</span></label>
+                        <input required type="text" th:field="*{lastName}" />
+                    </div>
+                    <div class="item">
+                        <label>Email Address<span>*</span></label>
+                        <input required type="email" th:field="*{email}" />
+                    </div>
+                    <div class="item">
+                        <label>Phone Number<span>*</span></label>
+                        <input required type="tel" th:field="*{phoneNum}" />
+                    </div>
+                    <div class="item">
+                        <label>Designation<span>*</span></label>
+                        <input required type="text" value="NA" th:field="*{jobTitle}" />
+                    </div>
+
+                    <div class="item">
+                        <label>Website</label>
+                        <input type="url" th:field="*{website}" />
+                    </div>
+                    <div class="item">
+                        <label>Summary<span>*</span></label>
+                        <textarea required type="text" rows="3" value="blah blah blah" th:field="*{summary}"></textarea>
+                    </div>
+                    <div class="item">
+                        <label>Profile Pic (URL)</label>
+                        <input type="url" th:field="*{profilePic}" />
+                    </div>
+                </div>
+            </fieldset>
+            <div class="btn-block">
+                <button type="submit" href="/">Create</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

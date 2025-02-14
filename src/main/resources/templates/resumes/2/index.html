@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+	<title th:text="${userProfile.getFirstName()}+' '+${userProfile.getLastName()} +' - '+ ${userProfile.getJobTitle()}"> [Title]</title>
+    <meta http-equiv="Content-Type" content="text/html" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Resume Template 2" />
+    <meta charset="UTF-8" />
+
+    <link type="text/css" rel="stylesheet" href="../resumes/2/style.css" />
+</head>
+
+<body>
+    <div id="page-wrap">
+        <img id="pic" th:src="${userProfile.getProfilePic() == null || userProfile.getProfilePic().trim() == ''}? '../resumes/no-profile-pic.png' : ${userProfile.getProfilePic()}" alt="profile pic" />
+
+        <div id="contact-info" class="vcard">
+            <h1 class="fn">
+                <span th:text="${userProfile.getFirstName()}+' '+${userProfile.getLastName()}">[First Name + Last Name]</span>
+                <a th:if="${originalUser}" href="/edit">Edit</a>
+            </h1>
+            <h2 th:text="${userProfile.getJobTitle()}">[Job Title]</h2>
+            <p>
+                <!-- TODO : href="mailto:${}" -->
+                Cell: <a class="email" th:text="${userProfile.getPhoneNum()}">[Phone Number]</a><br />
+                Email: <a class="email" th:text="${userProfile.getEmail()}" href="#">[email]</a><br />
+                Website: <a class="email" th:text="${userProfile.getWebsite()}" href="#">[Website]</a>
+            </p>
+        </div>
+
+        <div id="objective">
+            <p th:text="${userProfile.getSummary()}">
+                [Default Summary] I am an outgoing and energetic (ask anybody) young professional, seeking a career that
+                fits my professional skills, personality, and murderous tendencies. My squid-like head is a masterful
+                problem solver and inspires fear in who gaze upon it. I can bring world domination to your organization.
+            </p>
+        </div>
+
+        <div class="clear"></div>
+        <dl>
+            <br>
+            <dt>Experience</dt>
+            <dd th:each="experience : ${userProfile.getUserExperiences()}">
+                <h2 th:text="${experience.getCompany()}">[Company]</h2>
+                <h2>
+                    <span
+                        th:text="${experience.getPosition()} +',  '+ ${experience.formattedStartDate()}+' - '+ (${experience.isCurrentJob()}? 'Present' : ${experience.formattedEndDate()})">
+                        [Position, Start Date - End Date]
+                    </span>
+                </h2>
+                <ul>
+                    <li th:text="${experience.getDescription()}"> [Work Description] Inspired and won highest peasant
+                        death competition among servants, Helped coordinate managers to grow cult following, Provided
+                        untimely deaths to all who opposed</li>
+                </ul>
+            </dd>
+
+            <dd class="clear"></dd>
+            <dt>Education</dt>
+            <dd th:each="education : ${userProfile.getUserEducations()}">
+                <h2 th:text="${education.getCollege()}">[college]</h2>
+                <span th:text="${education.getDegree()} + ' - '+ ${education.getGrade()}">[Degree - Grades]</span>
+                <h2>
+                    <span
+                        th:text="${education.formattedStartDate()}+' - '+ (${education.isCurrentEducation()}? 'Present' : ${education.formattedEndDate()})">
+                        [Start Date - End Date]
+                    </span>
+                </h2>
+                <br>
+            </dd>
+
+
+            <dd class="clear"></dd>
+            <dt>Projects</dt>
+            <dd th:each="project: ${userProfile.getUserProjects()}">
+                <h2 th:text="${project.getProjectName()}">[Project Name]</h2>
+                <span th:text="${project.getTools()}">[Tools used]</span>
+                <h2>
+                    <span th:text="${project.formattedStartDate()}+' - '+ ${project.formattedEndDate()}">
+                        [Start Date - End Date]
+                    </span>
+                </h2>
+                <ul>
+                    <li th:text="${project.getDescription()}">[Project Description] Inspired and won highest peasant
+                        death competition among servants, Helped coordinate managers to grow cult following, Provided
+                        untimely deaths to all who opposed</li>
+                </ul>
+            </dd>
+
+            <dd class="clear"></dd>
+            <dt>Skills</dt>
+            <dd>
+                <span th:each="i : ${#numbers.sequence(0, 2)}">
+                    <ul class="skills">
+                        <div th:each="skill, index : ${userProfile.getUserSkills()}" th:unless="${(index.index-i) % 3}">
+                            <li th:text="${skill.getSkillName()}">[Skill Name]</li>
+                        </div>
+                    </ul>
+                </span>
+            </dd>
+            <br>
+
+        </dl>
+
+        <div class="clear"></div>
+    </div>
+</body>
+
+</html>
